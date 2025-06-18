@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Website Danz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Kanit', sans-serif;
+    }
+    body {
+      margin: 0;
+      background: linear-gradient(to bottom, #001f3f, #003366);
+      color: #fff;
+      background-image: url('https://files.catbox.moe/oq789i.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: rgba(0,0,0,0.6);
+      position: relative;
+    }
+    .menu-toggle {
+      font-size: 24px;
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
+    .logos {
+      display: flex;
+      gap: 6px;
+    }
+    .logos img {
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      opacity: 0;
+      transform: translateX(100%);
+      animation: logoBounce 1s ease forwards;
+    }
+    .logos img:nth-child(1){ animation-delay:0.3s }
+    .logos img:nth-child(2){ animation-delay:0.6s }
+    .logos img:nth-child(3){ animation-delay:0.9s }
+    @keyframes logoBounce {
+      0%   { transform: translateX(100%); opacity:0 }
+      60%  { transform: translateX(-10%); opacity:1 }
+      80%  { transform: translateX(5%) }
+      100% { transform: translateX(0) }
+    }
+    .menu-content {
+      display: none;
+      position: absolute;
+      top: 60px;
+      left: 15px;
+      width: 240px;
+      background: rgba(0,0,0,0.85);
+      border-radius: 12px;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+      padding: 15px;
+      animation: slideDown 0.3s ease;
+      z-index: 999;
+    }
+    @keyframes slideDown {
+      from { opacity:0; transform: translateY(-10px) }
+      to   { opacity:1; transform: translateY(0) }
+    }
+    .menu-content a {
+      display: block;
+      color: #fff;
+      text-decoration: none;
+      margin: 8px 0;
+      font-size: 14px;
+      transition: color 0.3s;
+    }
+    .menu-content a:hover {
+      color: #00d9ff;
+    }
+    .tab {
+      display: none;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 30px;
+      background: rgba(0,0,0,0.6);
+      border-radius: 10px;
+      animation: fadeIn 0.4s ease;
+    }
+    .tab.active { display: block; }
+    @keyframes fadeIn {
+      from { opacity:0; transform: translateY(10px) }
+      to   { opacity:1; transform: translateY(0) }
+    }
+    .question { margin:20px 0 }
+    .question label { display:block; margin-bottom:6px; font-weight:bold }
+    input[type="text"] {
+      width:100%; padding:10px; border:1px solid #ccc; border-radius:8px;
+    }
+    .google-form-option label {
+      display:block; background:#fff; color:#000; padding:10px;
+      margin-bottom:10px; border-radius:8px; cursor:pointer;
+      transition: background 0.3s;
+    }
+    .google-form-option input[type="radio"] { margin-right:10px }
+    .google-form-option input[type="radio"]:checked + span {
+      color:green; font-weight:bold;
+    }
+    .lanjut-button, .back-button, .final-tab button {
+      margin:10px; padding:12px 20px; color:#black; border:none;
+      border-radius:8px; cursor:pointer; transition:background 0.3s;
+    }
+    .lanjut-button:disabled { background:grey; cursor:not-allowed }
+    .lanjut-button.enabled { background:#007BFF }
+    .lanjut-button.enabled:hover { background:#0056b3 }
+    .back-button { background:#007BFF }
+    .center { text-align:center }
+    audio { display:none }
+    .desc {
+      font-size:0.9rem; color:#007BFF; margin-left:35px;
+      margin-top:-10px; margin-bottom:10px;
+    }
+  </style>
+</head>
+<body onload="document.getElementById('bgmusic').play(); animateLogos();">
+
+  <header>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <div class="logos">
+      <img src="https://files.catbox.moe/i7fwg3.png" alt="logo1">
+      <img src="https://files.catbox.moe/dqhgpb.png" alt="logo2">
+      <img src="https://files.catbox.moe/yynfls.png" alt="logo3">
+    </div>
+  </header>
+
+  <div class="menu-content" id="menuContent">
+    <a href="#">📋 Daftar</a>
+    <a href="#">ℹ️ Deskripsi: Website Danz Interaktif</a>
+    <a href="https://wa.me/6285950615468?text=.menu" target="_blank">🤖 No Bot</a>
+    <a href="https://wa.me/6283844026828" target="_blank">👑 No Owner</a>
+    <a href="https://chat.whatsapp.com/IG9ErAkhICS8JPoaQqG3Wu" target="_blank">👥 Group Free Bot</a>
+    <a href="https://whatsapp.com/channel/0029Vb5RBpCLSmbTNvFPGH2B" target="_blank">📢 Channel Danz</a>
+    <a href="https://wa.me/6283844026828?text=ada%20bug%20bang%20danzz" target="_blank">🐞 Find bug? Message me</a>
+  </div>
+
+  <audio autoplay loop id="bgmusic">
+    <source src="https://files.catbox.moe/f73cvt.mp3" type="audio/mp3">
+  </audio>
+
+  <div class="tab active">
+    <h2>Selamat datang di website Danz</h2>
+    <p>Silakan isi kolom di bawah ini</p>
+    <div class="question">
+      <label>Nama</label>
+      <input type="text" id="namaInput" placeholder="Masukkan nama">
+    </div>
+    <div class="question">
+      <label>Kelas</label>
+      <input type="text" id="kelasInput" placeholder="Masukkan kelas">
+    </div>
+    <div class="question">
+      <label>Umur</label>
+      <input type="text" id="umurInput" placeholder="Masukkan umur">
+    </div>
+    <div class="center">
+      <button class="lanjut-button" id="btnLanjut" onclick="validateInputs()" disabled>Lanjut</button>
+    </div>
+  </div>
+
+  <div class="tab">
+    <h2>Silakan pilih jawabanmu!</h2>
+    <div class="question">
+      <label>Seseorang tinggal di depanmu:</label>
+      <div class="google-form-option">
+        <label><input type="radio" name="q1" value="true"><span>A</span></label>
+        <div class="desc">Orang A adalah tetangga dekat Danz</div>
+        <label><input type="radio" name="q1" value="false"><span>B</span></label>
+        <div class="desc">Orang B tinggal di sebelah kiri</div>
+        <label><input type="radio" name="q1" value="false"><span>C</span></label>
+        <div class="desc">Orang C tinggal di belakang rumah</div>
+      </div>
+    </div>
+    <div class="question">
+      <label>Siapa yang kamu tembak jam 9:05?</label>
+      <div class="google-form-option">
+        <label><input type="radio" name="q2" value="false"><span>A</span></label>
+        <div class="desc">A bukan target utama</div>
+        <label><input type="radio" name="q2" value="true"><span>B</span></label>
+        <div class="desc">B adalah yang ditembak</div>
+        <label><input type="radio" name="q2" value="false"><span>C</span></label>
+        <div class="desc">C tidak berada di lokasi</div>
+      </div>
+    </div>
+    <div class="center">
+      <button class="back-button" onclick="showTab(0)">⬅ Kembali</button>
+      <button class="lanjut-button" id="lihatHasilBtn" onclick="checkScore()" disabled>Lihat Hasil</button>
+    </div>
+  </div>
+
+  <div class="tab">
+    <h2 class="center">Hasil Jawaban Kamu</h2>
+    <div class="question center">
+      <p><strong>Skor kamu: <span id="score">0</span>/100 🎯</strong></p>
+      <button class="back-button" onclick="showTab(1)">⬅ Kembali</button>
+      <button class="lanjut-button" onclick="showTab(3)">Lanjut ke Tab Akhir</button>
+    </div>
+  </div>
+
+  <div class="tab final-tab">
+    <h2 class="center">Selamat!</h2>
+    <p class="center">Score akhir anda adalah:</p>
+    <div class="center">
+      <button class="lanjut-button" id="finalScore">0</button>
+    </div>
+    <div class="center">
+      <a href="https://wa.me/6283844026828?text=aku%20udah%20isi%20nih%20ganteng" target="_blank">
+        <button class="lanjut-button">Lanjut ke WhatsApp</button>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab');
+    const namaInput = document.getElementById('namaInput');
+    const kelasInput = document.getElementById('kelasInput');
+    const umurInput = document.getElementById('umurInput');
+    const btnLanjut = document.getElementById('btnLanjut');
+    const lihatHasilBtn = document.getElementById('lihatHasilBtn');
+
+    function showTab(i){
+      tabs.forEach((t,idx)=> t.classList.toggle('active', idx===i));
+      window.scrollTo(0,0);
+    }
+
+    function toggleMenu(){
+      const m = document.getElementById('menuContent');
+      m.style.display = (m.style.display==='block') ? 'none' : 'block';
+    }
+
+    [namaInput,kelasInput,umurInput].forEach(inp=>{
+      inp.addEventListener('input',()=>{
+        const ok = namaInput.value && kelasInput.value && umurInput.value;
+        btnLanjut.disabled = !ok;
+        btnLanjut.classList.toggle('enabled', ok);
+      });
+    });
+
+    function validateInputs(){
+      if(!namaInput.value||!kelasInput.value||!umurInput.value){
+        alert('Semua kolom harus diisi!');
+        return;
+      }
+      showTab(1);
+    }
+
+    document.querySelectorAll('input[name="q1"],input[name="q2"]').forEach(r=>{
+      r.addEventListener('change',()=>{
+        const q1 = document.querySelector('input[name="q1"]:checked');
+        const q2 = document.querySelector('input[name="q2"]:checked');
+        lihatHasilBtn.disabled = !(q1 && q2);
+      });
+    });
+
+    function checkScore(){
+      let score=0;
+      [document.querySelector('input[name="q1"]:checked'),
+       document.querySelector('input[name="q2"]:checked')]
+      .forEach(a=>{ if(a&&a.value==='true') score+=50 });
+      document.getElementById('score').innerText=score;
+      document.getElementById('finalScore').innerText=score;
+      showTab(2);
+    }
+
+    function animateLogos(){
+      document.querySelectorAll('.logos img').forEach((img,i)=>
+        setTimeout(()=>img.classList.add('visible'), i*300)
+      );
+    }
+  </script>
+</body>
+</html>
