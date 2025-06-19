@@ -13,25 +13,38 @@
     body {
       margin: 0;
       padding: 0;
-      background: linear-gradient(to bottom, #0a0a0a, #1a1a1a);
+      background: linear-gradient(to bottom, #111, #222);
       color: #fff;
       scroll-behavior: smooth;
     }
     header {
-      text-align: center;
-      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
     }
-    header img {
-      width: 100px;
-      animation: bounceFade 2s infinite;
+    .logos {
+      display: flex;
+      gap: 10px;
+      animation: bounceFade 4s infinite;
+    }
+    .logos img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
     }
     @keyframes bounceFade {
       0%, 100% { transform: translateX(0); opacity: 1; }
-      50% { transform: translateX(-20px); opacity: 0.6; }
+      50% { transform: translateX(-15px); opacity: 0.6; }
+    }
+    .menu-toggle {
+      font-size: 30px;
+      cursor: pointer;
     }
     .menu-content {
+      display: none;
       text-align: center;
-      margin: 10px 20px;
+      padding: 10px;
     }
     .menu-content a {
       display: block;
@@ -41,7 +54,7 @@
     }
     .nav-buttons {
       text-align: center;
-      margin: 20px;
+      margin: 20px 0;
     }
     .nav-buttons button {
       background-color: #00aaff;
@@ -70,7 +83,7 @@
       border-radius: 6px;
       margin: 5px 0;
     }
-    input, textarea {
+    textarea {
       width: 100%;
       padding: 10px;
       border-radius: 8px;
@@ -82,7 +95,12 @@
 <body>
 
   <header>
-    <img src="https://files.catbox.moe/yynfls.png" alt="logo3">
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <div class="logos">
+      <img src="https://files.catbox.moe/yynfls.png" alt="logo1">
+      <img src="https://files.catbox.moe/yynfls.png" alt="logo2">
+      <img src="https://files.catbox.moe/yynfls.png" alt="logo3">
+    </div>
   </header>
 
   <div class="menu-content" id="menuContent">
@@ -95,7 +113,6 @@
     <a href="https://wa.me/6283844026828?text=ada%20bug%20bang%20danzz" target="_blank">🐞 Find bug? Message me</a>
   </div>
 
-  <!-- Navigasi tombol ke tab -->
   <div class="nav-buttons">
     <button onclick="document.getElementById('tabAI').scrollIntoView({ behavior: 'smooth' })">💬 Chat AI</button>
     <button onclick="document.getElementById('tabSewa').scrollIntoView({ behavior: 'smooth' })">🤖 Sewa Bot</button>
@@ -110,7 +127,7 @@
 
   <div class="tab" id="tabEdit">
     <h2 class="center">🎨 Daftar Harga Paid Edit</h2>
-    <p class="center">JJ Style - Rp10.000<br>3D Edit - Rp15.000<br>Transisi Keren - Rp7.000</p>
+    <p class="center">JJ Style - Rp10.000<br>3D Effect - Rp15.000<br>Transisi - Rp7.000</p>
   </div>
 
   <div class="tab" id="tabPanel">
@@ -123,8 +140,8 @@
     <div class="chat-box" id="chatBox">
       <p><strong>AI:</strong> Halo! Ada yang bisa aku bantu?</p>
     </div>
-    <textarea id="userInput" placeholder="Tulis pesan..."></textarea><br>
     <div class="center">
+      <textarea id="userInput" rows="2" placeholder="Tulis pesan..."></textarea><br>
       <button onclick="kirimChat()">Kirim</button>
     </div>
   </div>
@@ -134,6 +151,11 @@
   </audio>
 
   <script>
+    function toggleMenu() {
+      const menu = document.getElementById('menuContent');
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+
     function kirimChat() {
       const input = document.getElementById('userInput');
       const msg = input.value.trim();
@@ -142,11 +164,11 @@
       box.innerHTML += `<p><strong>Kamu:</strong> ${msg}</p>`;
       input.value = '';
       setTimeout(() => {
-        box.innerHTML += `<p><strong>AI:</strong> Maaf, fitur ini belum aktif penuh 😅</p>`;
+        box.innerHTML += `<p><strong>AI:</strong> Maaf, fitur ini belum aktif 😅</p>`;
         box.scrollTop = box.scrollHeight;
       }, 1000);
     }
   </script>
 
 </body>
-  </html>
+      </html>
