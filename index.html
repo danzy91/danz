@@ -39,9 +39,19 @@
       color: #00bfff;
       text-decoration: none;
     }
-    .section {
+    .tab {
       padding: 30px 20px;
       border-bottom: 1px solid #444;
+    }
+    .question {
+      margin-bottom: 15px;
+    }
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      margin-top: 5px;
     }
     button {
       background-color: #00aaff;
@@ -52,34 +62,17 @@
       cursor: pointer;
       margin: 5px;
     }
-    .price-list {
-      display: none;
-      background-color: #222;
-      padding: 10px;
-      border-radius: 8px;
-      margin-top: 10px;
-    }
-    .chat-box {
-      background-color: #1e1e1e;
-      padding: 10px;
-      border-radius: 8px;
-    }
-    .chat-box p {
-      background: #2d2d2d;
-      padding: 8px;
-      border-radius: 6px;
-      margin: 5px 0;
-    }
-    input[type="text"], textarea {
-      width: 100%;
-      padding: 10px;
-      border: none;
-      border-radius: 8px;
-      margin-top: 5px;
+    .center {
+      text-align: center;
     }
     .nav-buttons {
       text-align: center;
-      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    .desc {
+      font-size: 14px;
+      margin-bottom: 10px;
+      margin-left: 20px;
     }
   </style>
 </head>
@@ -99,53 +92,54 @@
     <a href="https://wa.me/6283844026828?text=ada%20bug%20bang%20danzz" target="_blank">🐞 Find bug? Message me</a>
   </div>
 
+  <!-- 🔘 Navigasi ke Tab -->
   <div class="nav-buttons">
-    <button onclick="document.getElementById('tabChatAI').scrollIntoView()">💬 Chat AI</button>
-    <button onclick="document.getElementById('tabSewaBot').scrollIntoView()">🤖 Sewa Bot</button>
-    <button onclick="document.getElementById('tabPaidEdit').scrollIntoView()">🎨 Paid Edit</button>
-    <button onclick="document.getElementById('tabPanel').scrollIntoView()">📦 Panel Pterodactyl</button>
+    <button onclick="document.getElementById('tabAI').scrollIntoView({ behavior: 'smooth' })">💬 Chat AI</button>
+    <button onclick="document.getElementById('tabSewa').scrollIntoView({ behavior: 'smooth' })">🤖 Sewa Bot</button>
+    <button onclick="document.getElementById('tabEdit').scrollIntoView({ behavior: 'smooth' })">🎨 Paid Edit</button>
+    <button onclick="document.getElementById('tabPanel').scrollIntoView({ behavior: 'smooth' })">📦 Panel Pterodactyl</button>
   </div>
 
-  <div class="section" id="tabPanel">
-    <h2>📦 Daftar Harga Panel Pterodactyl</h2>
-    <p>🧠 Untuk hosting script WhatsApp bot dan lainnya.</p>
-    <div class="price-list" style="display:block">
-      <p>1GB RAM - Rp5.000/Bulan</p>
-      <p>2GB RAM - Rp10.000/Bulan</p>
-      <p>3GB RAM - Rp15.000/Bulan</p>
-      <p>5GB RAM - Rp20.000/Bulan</p>
-      <p>Unlimited - Rp50.000/Bulan</p>
+  <!-- 🔻 Tambahkan ID pada tiap tab agar bisa di-scroll -->
+  <div class="tab" id="tabSewa">
+    <h2 class="center">📦 Daftar Harga Sewa Bot</h2>
+    <div class="center">
+      <p>Pribadi: Rp10.000/Bulan</p>
+      <p>Premium: Rp20.000/Bulan</p>
+      <p>Full Fitur: Rp30.000/Bulan</p>
     </div>
   </div>
 
-  <div class="section" id="tabSewaBot">
-    <h2>🤖 Daftar Harga Sewa Bot</h2>
-    <div class="price-list" style="display:block">
-      <p>Pribadi - Rp10.000/Bulan</p>
-      <p>Premium - Rp20.000/Bulan</p>
-      <p>Full Fitur - Rp30.000/Bulan</p>
-      <p>Bot API/Key - Rp40.000/Bulan</p>
+  <div class="tab" id="tabEdit">
+    <h2 class="center">🎨 Daftar Harga Paid Edit</h2>
+    <div class="center">
+      <p>JJ Style: Rp10.000</p>
+      <p>3D Effect: Rp15.000</p>
+      <p>Animasi: Rp5.000</p>
+      <p>Script Encrypt: Rp30.000</p>
+      <p>Script No Encrypt: Rp20.000</p>
     </div>
   </div>
 
-  <div class="section" id="tabPaidEdit">
-    <h2>🎨 Daftar Harga Paid Edit</h2>
-    <div class="price-list" style="display:block">
-      <p>JJ Style - Rp10.000</p>
-      <p>3D Effect - Rp15.000</p>
-      <p>Animasi Loading - Rp7.000</p>
-      <p>Script No Encrypt - Rp20.000</p>
-      <p>Script Encrypt - Rp30.000</p>
+  <div class="tab" id="tabPanel">
+    <h2 class="center">📦 Daftar Harga Panel Pterodactyl</h2>
+    <div class="center">
+      <p>1GB RAM: Rp5.000/Bulan</p>
+      <p>2GB RAM: Rp10.000/Bulan</p>
+      <p>3GB RAM: Rp15.000/Bulan</p>
+      <p>Unlimited: Rp50.000/Bulan</p>
     </div>
   </div>
 
-  <div class="section" id="tabChatAI">
-    <h2>💬 Chat AI</h2>
-    <div class="chat-box" id="chatBox">
-      <p><strong>AI:</strong> Halo! Ada yang bisa aku bantu?</p>
+  <div class="tab" id="tabAI">
+    <h2 class="center">💬 Chat AI</h2>
+    <div class="center">
+      <div id="chatBox" style="background:#1e1e1e;padding:10px;border-radius:10px;margin-bottom:10px">
+        <p><strong>AI:</strong> Halo! Ada yang bisa aku bantu?</p>
+      </div>
+      <textarea id="userInput" rows="2" placeholder="Tulis pesan..."></textarea><br>
+      <button onclick="kirimChat()">Kirim</button>
     </div>
-    <textarea id="userInput" rows="2" placeholder="Tulis pesan..."></textarea>
-    <button onclick="kirimChat()">Kirim</button>
   </div>
 
   <audio autoplay loop id="bgmusic">
@@ -161,11 +155,11 @@
       box.innerHTML += `<p><strong>Kamu:</strong> ${msg}</p>`;
       input.value = '';
       setTimeout(() => {
-        box.innerHTML += `<p><strong>AI:</strong> Maaf, fitur AI belum aktif penuh 😄</p>`;
+        box.innerHTML += `<p><strong>AI:</strong> Fitur AI belum aktif, nanti akan segera online ya 😄</p>`;
         box.scrollTop = box.scrollHeight;
       }, 1000);
     }
   </script>
 
 </body>
-  </html>
+</html>
