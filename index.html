@@ -6,10 +6,7 @@
   <title>Website Danz</title>
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
-    * {
-      box-sizing: border-box;
-      font-family: 'Kanit', sans-serif;
-    }
+    * { box-sizing: border-box; font-family: 'Kanit', sans-serif; }
     body {
       margin: 0;
       padding: 0;
@@ -27,16 +24,14 @@
       align-items: center;
       gap: 10px;
     }
-    .logos img:first-child,
-    .logos img:nth-child(2) {
+    .logos img {
       width: 60px;
       height: 60px;
       border-radius: 50%;
     }
-    .logos img:nth-child(3) {
+    .logos img:last-child {
       width: 90px;
       height: 90px;
-      border-radius: 50%;
       animation: bounceFade 4s infinite;
     }
     @keyframes bounceFade {
@@ -44,14 +39,6 @@
       25% { transform: translateX(10px) scale(1.05); opacity: 0.9; }
       50% { transform: translateX(-10px) scale(0.95); opacity: 0.7; }
       75% { transform: translateX(5px) scale(1); opacity: 0.85; }
-    }
-    .menu-toggle {
-      position: fixed;
-      top: 15px;
-      left: 20px;
-      font-size: 30px;
-      cursor: pointer;
-      z-index: 1000;
     }
     .menu-content {
       display: none;
@@ -62,7 +49,6 @@
       padding: 15px;
       border-radius: 8px;
       z-index: 999;
-      width: max-content;
       box-shadow: 0 0 10px #000;
     }
     .menu-content a {
@@ -71,10 +57,26 @@
       margin: 8px 0;
       text-decoration: none;
     }
-    .nav-buttons {
-      text-align: center;
-      margin: 20px 0;
+    .menu-toggle {
+      position: fixed;
+      top: 15px;
+      left: 20px;
+      font-size: 30px;
+      cursor: pointer;
+      z-index: 1000;
     }
+    .tab { padding: 30px 20px; }
+    .question { margin-bottom: 20px; }
+    .center { text-align: center; }
+    .lanjut-button, .back-button {
+      background-color: #7a00cc;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .google-form-option input { margin-right: 5px; }
     .nav-buttons button {
       background-color: #7a00cc;
       border: none;
@@ -83,13 +85,6 @@
       color: white;
       cursor: pointer;
       margin: 5px;
-    }
-    .tab {
-      padding: 30px 20px;
-      border-bottom: 1px solid #333;
-    }
-    .center {
-      text-align: center;
     }
     .chat-box {
       background-color: #1e1e1e;
@@ -115,82 +110,193 @@
 </head>
 <body>
 
-  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+<div class="menu-toggle" onclick="toggleMenu()">☰</div>
 
-  <header>
-    <div class="logos">
-      <img src="https://files.catbox.moe/k7l1vj.png" alt="logo1">
-      <img src="https://files.catbox.moe/3x2q97.png" alt="logo2">
-      <img src="https://files.catbox.moe/yynfls.png" alt="logo3">
+<header>
+  <div class="logos">
+    <img src="https://files.catbox.moe/k7l1vj.png" alt="logo1">
+    <img src="https://files.catbox.moe/3x2q97.png" alt="logo2">
+    <img src="https://files.catbox.moe/yynfls.png" alt="logo3">
+  </div>
+</header>
+
+<div class="menu-content" id="menuContent">
+  <a href="#">📋 Daftar</a>
+  <a href="#">ℹ️ Deskripsi: Website Danz Interaktif</a>
+  <a href="https://wa.me/6285950615468?text=.menu" target="_blank">🤖 No Bot</a>
+  <a href="https://wa.me/6283844026828" target="_blank">👑 No Owner</a>
+  <a href="https://chat.whatsapp.com/IG9ErAkhICS8JPoaQqG3Wu" target="_blank">👥 Group Free Bot</a>
+  <a href="https://whatsapp.com/channel/0029Vb5RBpCLSmbTNvFPGH2B" target="_blank">📢 Channel Danz</a>
+  <a href="https://wa.me/6283844026828?text=ada%20bug%20bang%20danzz" target="_blank">🐞 Find bug? Message me</a>
+</div>
+
+<audio autoplay loop id="bgmusic">
+  <source src="https://files.catbox.moe/f73cvt.mp3" type="audio/mp3">
+</audio>
+
+<div class="tab active">
+  <h2>Selamat datang di website Danz</h2>
+  <p>Silakan isi kolom di bawah ini</p>
+  <div class="question">
+    <label>Nama</label>
+    <input type="text" id="namaInput" placeholder="Masukkan nama">
+  </div>
+  <div class="question">
+    <label>Kelas</label>
+    <input type="text" id="kelasInput" placeholder="Masukkan kelas">
+  </div>
+  <div class="question">
+    <label>Umur</label>
+    <input type="text" id="umurInput" placeholder="Masukkan umur">
+  </div>
+  <div class="center">
+    <button class="lanjut-button" id="btnLanjut" onclick="validateInputs()" disabled>Lanjut</button>
+  </div>
+</div>
+
+<div class="tab">
+  <h2>Silakan pilih jawabanmu!</h2>
+  <div class="question">
+    <label>Seseorang tinggal di depanmu:</label>
+    <div class="google-form-option">
+      <label><input type="radio" name="q1" value="true"><span>A</span></label>
+      <div class="desc">Orang A adalah tetangga dekat Danz</div>
+      <label><input type="radio" name="q1" value="false"><span>B</span></label>
+      <div class="desc">Orang B tinggal di sebelah kiri</div>
+      <label><input type="radio" name="q1" value="false"><span>C</span></label>
+      <div class="desc">Orang C tinggal di belakang rumah</div>
     </div>
-  </header>
-
-  <div class="menu-content" id="menuContent">
-    <a href="#">📋 Daftar</a>
-    <a href="#">ℹ️ Deskripsi: Website Danz Interaktif</a>
-    <a href="https://wa.me/6285950615468?text=.menu" target="_blank">🤖 No Bot</a>
-    <a href="https://wa.me/6283844026828" target="_blank">👑 No Owner</a>
-    <a href="https://chat.whatsapp.com/IG9ErAkhICS8JPoaQqG3Wu" target="_blank">👥 Group Free Bot</a>
-    <a href="https://whatsapp.com/channel/0029Vb5RBpCLSmbTNvFPGH2B" target="_blank">📢 Channel Danz</a>
-    <a href="https://wa.me/6283844026828?text=ada%20bug%20bang%20danzz" target="_blank">🐞 Find bug? Message me</a>
   </div>
-
-  <div class="nav-buttons">
-    <button onclick="document.getElementById('tabAI').scrollIntoView({ behavior: 'smooth' })">💬 Chat AI</button>
-    <button onclick="document.getElementById('tabSewa').scrollIntoView({ behavior: 'smooth' })">🤖 Sewa Bot</button>
-    <button onclick="document.getElementById('tabEdit').scrollIntoView({ behavior: 'smooth' })">🎨 Paid Edit</button>
-    <button onclick="document.getElementById('tabPanel').scrollIntoView({ behavior: 'smooth' })">📦 Panel Pterodactyl</button>
-  </div>
-
-  <div class="tab" id="tabSewa">
-    <h2 class="center">🤖 Daftar Harga Sewa Bot</h2>
-    <p class="center">Pribadi - Rp10.000/Bulan<br>Premium - Rp20.000<br>Full Fitur - Rp30.000</p>
-  </div>
-
-  <div class="tab" id="tabEdit">
-    <h2 class="center">🎨 Daftar Harga Paid Edit</h2>
-    <p class="center">JJ Style - Rp10.000<br>3D Effect - Rp15.000<br>Transisi - Rp7.000</p>
-  </div>
-
-  <div class="tab" id="tabPanel">
-    <h2 class="center">📦 Harga Panel Pterodactyl</h2>
-    <p class="center">1GB - Rp5.000<br>2GB - Rp10.000<br>5GB - Rp20.000<br>Unlimited - Rp50.000</p>
-  </div>
-
-  <div class="tab" id="tabAI">
-    <h2 class="center">💬 Chat AI</h2>
-    <div class="chat-box" id="chatBox">
-      <p><strong>AI:</strong> Halo! Ada yang bisa aku bantu?</p>
-    </div>
-    <div class="center">
-      <textarea id="userInput" rows="2" placeholder="Tulis pesan..."></textarea><br>
-      <button onclick="kirimChat()">Kirim</button>
+  <div class="question">
+    <label>Siapa yang kamu tembak jam 9:05?</label>
+    <div class="google-form-option">
+      <label><input type="radio" name="q2" value="false"><span>A</span></label>
+      <div class="desc">A bukan target utama</div>
+      <label><input type="radio" name="q2" value="true"><span>B</span></label>
+      <div class="desc">B adalah yang ditembak</div>
+      <label><input type="radio" name="q2" value="false"><span>C</span></label>
+      <div class="desc">C tidak berada di lokasi</div>
     </div>
   </div>
+  <div class="center">
+    <button class="back-button" onclick="showTab(0)">⬅ Kembali</button>
+    <button class="lanjut-button" id="lihatHasilBtn" onclick="checkScore()" disabled>Lihat Hasil</button>
+  </div>
+</div>
 
-  <audio autoplay loop id="bgmusic">
-    <source src="https://files.catbox.moe/f73cvt.mp3" type="audio/mp3">
-  </audio>
+<div class="tab">
+  <h2 class="center">Hasil Jawaban Kamu</h2>
+  <div class="question center">
+    <p><strong>Skor kamu: <span id="score">0</span>/100 🎯</strong></p>
+    <button class="back-button" onclick="showTab(1)">⬅ Kembali</button>
+    <button class="lanjut-button" onclick="showTab(3)">Lanjut ke Tab Akhir</button>
+  </div>
+</div>
 
-  <script>
-    function toggleMenu() {
-      const menu = document.getElementById('menuContent');
-      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+<div class="tab final-tab">
+  <h2 class="center">Selamat!</h2>
+  <p class="center">Score akhir anda adalah:</p>
+  <div class="center">
+    <button class="lanjut-button" id="finalScore">0</button>
+  </div>
+  <div class="center">
+    <a href="https://wa.me/6283844026828?text=aku%20udah%20isi%20nih%20ganteng" target="_blank">
+      <button class="lanjut-button">Lanjut ke WhatsApp</button>
+    </a>
+  </div>
+</div>
+
+<!-- 🔽 Tambahan Fitur di Bawah -->
+<div class="nav-buttons center">
+  <button onclick="document.getElementById('tabAI').scrollIntoView({ behavior: 'smooth' })">💬 Chat AI</button>
+  <button onclick="document.getElementById('tabSewa').scrollIntoView({ behavior: 'smooth' })">🤖 Sewa Bot</button>
+  <button onclick="document.getElementById('tabEdit').scrollIntoView({ behavior: 'smooth' })">🎨 Paid Edit</button>
+  <button onclick="document.getElementById('tabPanel').scrollIntoView({ behavior: 'smooth' })">📦 Panel Pterodactyl</button>
+</div>
+
+<div class="tab" id="tabSewa">
+  <h2 class="center">🤖 Daftar Harga Sewa Bot</h2>
+  <p class="center">Pribadi - Rp10.000/Bulan<br>Premium - Rp20.000<br>Full Fitur - Rp30.000</p>
+</div>
+
+<div class="tab" id="tabEdit">
+  <h2 class="center">🎨 Daftar Harga Paid Edit</h2>
+  <p class="center">JJ Style - Rp10.000<br>3D Effect - Rp15.000<br>Transisi - Rp7.000</p>
+</div>
+
+<div class="tab" id="tabPanel">
+  <h2 class="center">📦 Harga Panel Pterodactyl</h2>
+  <p class="center">1GB - Rp5.000<br>2GB - Rp10.000<br>5GB - Rp20.000<br>Unlimited - Rp50.000</p>
+</div>
+
+<div class="tab" id="tabAI">
+  <h2 class="center">💬 Chat AI</h2>
+  <div class="chat-box" id="chatBox">
+    <p><strong>AI:</strong> Halo! Ada yang bisa aku bantu?</p>
+  </div>
+  <div class="center">
+    <textarea id="userInput" rows="2" placeholder="Tulis pesan..."></textarea><br>
+    <button onclick="kirimChat()">Kirim</button>
+  </div>
+</div>
+
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById('menuContent');
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+  }
+  function validateInputs() {
+    if (!namaInput.value || !kelasInput.value || !umurInput.value) {
+      alert('Semua kolom harus diisi!');
+      return;
     }
-
-    function kirimChat() {
-      const input = document.getElementById('userInput');
-      const msg = input.value.trim();
-      if (!msg) return;
-      const box = document.getElementById('chatBox');
-      box.innerHTML += `<p><strong>Kamu:</strong> ${msg}</p>`;
-      input.value = '';
-      setTimeout(() => {
-        box.innerHTML += `<p><strong>AI:</strong> Maaf, fitur ini belum aktif 😅</p>`;
-        box.scrollTop = box.scrollHeight;
-      }, 1000);
-    }
-  </script>
-
+    showTab(1);
+  }
+  function showTab(i) {
+    tabs.forEach((t, idx) => t.classList.toggle('active', idx === i));
+    window.scrollTo(0, 0);
+  }
+  function checkScore() {
+    let score = 0;
+    [document.querySelector('input[name="q1"]:checked'),
+     document.querySelector('input[name="q2"]:checked')]
+    .forEach(a => { if (a && a.value === 'true') score += 50 });
+    document.getElementById('score').innerText = score;
+    document.getElementById('finalScore').innerText = score;
+    showTab(2);
+  }
+  const tabs = document.querySelectorAll('.tab');
+  const namaInput = document.getElementById('namaInput');
+  const kelasInput = document.getElementById('kelasInput');
+  const umurInput = document.getElementById('umurInput');
+  const btnLanjut = document.getElementById('btnLanjut');
+  const lihatHasilBtn = document.getElementById('lihatHasilBtn');
+  document.querySelectorAll('input[name="q1"],input[name="q2"]').forEach(r => {
+    r.addEventListener('change', () => {
+      const q1 = document.querySelector('input[name="q1"]:checked');
+      const q2 = document.querySelector('input[name="q2"]:checked');
+      lihatHasilBtn.disabled = !(q1 && q2);
+    });
+  });
+  [namaInput, kelasInput, umurInput].forEach(inp => {
+    inp.addEventListener('input', () => {
+      const ok = namaInput.value && kelasInput.value && umurInput.value;
+      btnLanjut.disabled = !ok;
+      btnLanjut.classList.toggle('enabled', ok);
+    });
+  });
+  function kirimChat() {
+    const input = document.getElementById('userInput');
+    const msg = input.value.trim();
+    if (!msg) return;
+    const box = document.getElementById('chatBox');
+    box.innerHTML += `<p><strong>Kamu:</strong> ${msg}</p>`;
+    input.value = '';
+    setTimeout(() => {
+      box.innerHTML += `<p><strong>AI:</strong> Maaf, fitur ini belum aktif 😅</p>`;
+      box.scrollTop = box.scrollHeight;
+    }, 1000);
+  }
+</script>
 </body>
-    </html>
+  </html>
